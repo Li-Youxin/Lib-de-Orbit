@@ -80,7 +80,7 @@ function TimelineView() {
 
 function MediaView() {
   const [kind,setKind]=useState('all');
-  const media=byType(['media']).filter(e=>kind==='all'||kind==='legacy'&&e.status==='legacy'||kind==='current'&&e.status!=='legacy');
+  const media=byType(['media']).filter(e=>e.media.length>0).filter(e=>kind==='all'||kind==='legacy'&&e.status==='legacy'||kind==='current'&&e.status!=='legacy');
   return <><PageHeading en="Visual archive" title="视觉资料" count={media.length}/><div className="segmented" role="group" aria-label="媒体范围">{[['all','全部影像'],['current','附图'],['legacy','旧稿扫描']].map(([v,l])=><button key={v} aria-pressed={kind===v} onClick={()=>setKind(v)}>{l}</button>)}</div><div className="media-grid">{media.map((e,i)=><Link href={`/entity/${e.id}/`} key={e.id} className={'media-item media-'+(e.tags.includes('map')?'wide':'scan')}><img loading={i<3?'eager':'lazy'} src={asset(e.media[0].replace('/media/','/media/thumbs/').replace(/\.[^.]+$/,'.webp'))} alt={e.name}/><span className="media-caption"><span className="micro">{e.id} / {e.tags[0]}</span><strong>{e.name}</strong><span>{statusLabels[e.status]}</span></span></Link>)}</div></>;
 }
 

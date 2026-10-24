@@ -9,12 +9,14 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "sync:notion": "node --env-file-if-exists=.env.local scripts/sync-notion.mjs",
-    "test:data": "node scripts/check-data.mjs"
+    "test:data": "node scripts/check-data.mjs",
+    "test:notion": "node --test scripts/notion-model.test.mjs"
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.1.5",
     "lucide-react": "^0.468.0",
     "next": "16.4.3",
+    "node-html-parser": "^9.0.5",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-markdown": "^10.1.0",

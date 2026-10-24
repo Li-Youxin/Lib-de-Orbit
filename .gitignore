@@ -6,3 +6,5 @@ out/
 !.env.example
 screenshots/
 *.log
+src/data/notion-import-map.json
+next-env.d.ts

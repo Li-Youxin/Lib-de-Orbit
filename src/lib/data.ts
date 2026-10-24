@@ -7,7 +7,7 @@ export const entities: Entity[] = notion.enabled ? notion.entities : local.entit
 export const entityById = Object.fromEntries(entities.map(entity => [entity.id, entity]));
 export const collections = [
   ...local.collections.map(collection => ({ ...collection, ids: notion.enabled
-    ? entities.filter(entity => collection.ids.some(id => local.entities.find(record => record.id === id)?.name === entity.name)).map(entity => entity.id)
+    ? entities.filter(entity => collection.ids.includes(entity.id)).map(entity => entity.id)
     : collection.ids.filter(id => entityById[id]) })),
   ...(notion.enabled ? [...new Set(entities.flatMap(entity => entity.tags))].sort().map((tag, index) => ({
     slug: 'tag-' + index, name: tag, subtitle: 'Notion collection',

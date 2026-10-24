@@ -30,10 +30,11 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Sync published Notion records
-        if: env.NOTION_TOKEN != '' && env.NOTION_DATA_SOURCE_ID != ''
+        if: env.NOTION_TOKEN != ''
         run: npm run sync:notion
       - run: node scripts/prepare-media.mjs
       - run: npm run test:data
+      - run: npm run test:notion
       - run: npm run typecheck
       - run: npm run lint
       - uses: actions/configure-pages@v5
