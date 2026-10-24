@@ -3,7 +3,8 @@ import notion from '@/data/notion.json';
 import type { ArchiveData, Entity } from './types';
 
 const local = source as ArchiveData;
-export const entities: Entity[] = notion.enabled ? notion.entities : local.entities;
+const synced = notion as { enabled: boolean; entities: Entity[]; syncedAt: string | null };
+export const entities: Entity[] = synced.enabled ? synced.entities : local.entities;
 export const entityById = Object.fromEntries(entities.map(entity => [entity.id, entity]));
 export const collections = [
   ...local.collections.map(collection => ({ ...collection, ids: notion.enabled
